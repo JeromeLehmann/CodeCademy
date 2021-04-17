@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CV</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+#mytest{position:relative;}
+#mytest2{position:relative;}
+
+#mytest3{position:relative;}
+
+      @keyframes slide-from-left {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left;
+        animation-duration: 1s;
+      }
+
+      @keyframes slide-from-left2 {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left2 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left2;
+        animation-duration: 1.5s;
+      }
+
+      @keyframes slide-from-left3 {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left3 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left3;
+        animation-duration: 2s;
+      }
+
+      @keyframes slide-from-left4 {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left4 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left4;
+        animation-duration: 2.5s;
+      }
+
+      .section-title {
+        font-family: 'Arial', monospace;
+        font-size: 12pt;
+      }
+
+      .box {
+        border: 10px solid #006;
+        -moz-border-radius: 40px;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        box-shadow: 15px 15px 10px #888;
+      }
+  </style>
+</head>
+<body>
+  <div id="slide-left" class="box">
+    <div id="exp-pro" class="section-title">EXPERIENCE PROFESSIONNELLE</div><br/>
+    <div id="exp-pro-dtl" style="display:none;">ADP<br/>CA<br/>IBM<br/></div>
+  </div><br/>
+  <div id="slide-left2" class="box">
+    <div id="frm" class="section-title">FORMATION</div><br/>
+    <div id="frm-dtl" style="display:none;">UNI<br/>IUT<br/></div>
+  </div><br/>
+  <div id="slide-left3" class="box">Fancy div3!</div><br/>
+  <div id="slide-left4" class="box">Fancy div4!</div><br/>
+
+  <script>
+function anm(){
+$('#slide-left').animate({left:'50%'}, duration: 1000)
+}
+function anm2(){
+$('#slide-left2').animate({left:'50%'}, duration: 1500)
+}
+function anm3(){
+$('#slide-left3').animate({left:'50%'}, duration: 2000)
+}
+function anm3(){
+$('#slide-left4').animate({left:'50%'}, duration: 2500)
+}
+
+
+
+    $('#exp-pro').click(function() {$('#exp-pro-dtl').slideToggle('slow') })
+    $('#frm').click(function() {$('#frm-dtl').slideToggle('slow') })
+
+var seq = $({});
+seq.queue("q1", function(next){
+   $('#exp-pro-dtl')
+    .slideDown(600,next);
+    }
+);
+seq.queue("q1", function(next){
+   $('#frm-dtl')
+    .slideDown(800,next);
+    }
+);
+seq.dequeue("q1");
+  </script>
+</body>
+</html>
