@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CV</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    @media screen and (max-width: 299px) {
+      #page-content {width:100%;float:left;}
+      .menubar a {float:none;width:100%;}
+    }
+    body {
+      margin: 0px;
+      width: 100%;
+      overflow-x: hidden; /* Because the 'padding' value causes the 'width:100%' to exceed the screen */
+/*      font-size: 5px;
+        style="background-color: black;
+              color: black;
+      background-color: black;*/
+    }
+    .dark-mode-lv0 {
+      background-color: white;
+      color: black;
+    }
+    .dark-mode-lv1 {
+      background-color: LightGray;
+      color: black;
+    }
+    .dark-mode-lv2 {
+      background-color: DarkGray;
+      color: black;
+    }
+    .dark-mode-lv3 {
+      background-color: DarkBlue;
+      color: Lavender; /*Ivory;SeaShell;*/
+      /* font: bolder */
+    }
+    .button {
+      opacity: 1;
+      cursor: pointer;
+    }
+    .button-disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .menubar-shift {
+      height:48px;
+      top: 0;
+      width: 100%;
+    }
+    .menubar {
+      overflow: hidden;
+      background-color:#7fff00; /*#aaa;*/
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index:2;
+    }
+    .menubar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .menubar a:hover {
+      background: #808080; /* #808080;*/ /*#888;*/
+      color: black;
+    }
+    #page-content {
+      /*  overflow: auto;*/
+  /*    padding: 16px;
+      margin-top: 30px;
+      height: 1500px;*/ /* Used in this example to enable scrolling */
+    }
+      #slide-left1, #slide-left2, #slide-left3, #slide-left4 {
+        left: -50%;
+        position:relative;
+      }
+      .box-section {
+        overflow: auto;
+        margin: auto;
+        text-align: center;
+        border: 10px solid #006;
+        -moz-border-radius: 40px;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        box-shadow: 15px 15px 10px #888;
+      }
+      #exp-udl,#frm-udl,#dvs-udl,#lng-udl {
+        width: 0px;
+        height: 5px;
+        background: black;
+        transition: width 1s;
+      }
+      #pfl-udl,#ctc-udl,#out-udl {
+        width: 0px;
+        height: 5px;
+        background: black;
+        transition: width 1s;
+      }
+      #lightMinus,#lightPlus,#fontMinus,#fontPlus,#lgFR,#lgEN,#exit {
+        border: 1px solid;
+      }
+      #fontMinus,#fontPlus {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+      }
+      .lg-vAlign { /* MUST be kept as a DIV ; this Vertical Align doesn't perform on a Span (so simulating the Span with 'inline-block') */
+        display:inline-block;
+        position:relative;
+        transition: transform 0.5s ease;
+
+        /*-moz-transition: transform 500ms ease 0s;
+        -o-transition: transform  500ms ease 0s;
+        -webkit-transition: transform 500ms ease 0s;*/
+      }
+      .lg-vAlign:hover {
+        /*-moz-transform: rotateY(5deg);
+        -o-transform: rotateY(35deg);
+        -webkit-transform: rotateY(35deg);*/
+        transform: rotateX(13deg) rotateY(25deg) rotateZ(9deg);
+      }
+      #lg{
+        align:absolute; /* To keep for Vertical Align 1/4 + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        transform: translate(0px,1.5px); /* To keep for Vertical Align 2/4  + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        width:24px;
+        height:15px;
+        border-radius: 8px; /* ou: 50% */
+        transition: box-shadow .5s, opacity .5s;
+      }
+      #lg:hover{
+        box-shadow: 2px 1px 2px 0.5px #aaa; /* 0 0 11px rgba(33,33,33,.2);*/
+        opacity: 1 /*0.75*/;
+      }
+      .rotateLeft,.rotateRight{
+          display:inline-block;
+          /* transition: transform 1s ease-in-out; IF WANT TO KEEP NOT COMING BACK OF THE WHEEL, THEN THIS LINE NOT NECESSARY */
+      }
+      .rotateLeft:hover {
+          animation: rotateLeft 0.8s ease-in-out;
+      }
+      .rotateRight:hover {
+          animation: rotateRight 0.8s ease-in-out;
+      }
+      @keyframes rotateLeft {
+          from {transform: rotate(0deg);}
+          to {transform: rotate(-360deg);}
+      }
+      @keyframes rotateRight {
+          from {transform: rotate(0deg);}
+          to {transform: rotate(360deg);}
+      }
+      .bounceMinus,.bouncePlus {
+          position: relative;
+          display:inline-block;
+          /*transition:all 1s ease-in-out;*/
+      }/*
+      .bounce:hover {
+        animation: bounce 1s ease-in-out;
+        animation-iteration-count: 1;
+      }
+      @keyframes bounce {
+        0% {
+            transform: translateY(0px);
+        }
+        15% {
+            transform: translateY(-15px);
+        }
+        50% {
+            transform: translateY(15px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+      }*/
+      .section-title {
+        cursor: pointer;
+        font-family: 'Arial', monospace;
+        font-size: 12pt;
+      }
+      .section-title-left {
+        cursor: pointer;
+      }
+      .section-content {
+        display:none;
+      }
+      .box-settings {
+        /*max-width: 250px;*/
+        margin: auto;
+        text-align: center;
+        border: 10px solid #006;
+        -moz-border-radius: 40px;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        box-shadow: 15px 15px 10px #888;
+        display: inline-block;
+      }
+      .settings {
+        position:fixed;
+        right:0;
+        top:5px;
+        /* To center to the middle of the screen:
+        top:10%;
+        left:50%;
+        transform: translate(-50%, -50%); */
+        z-index: 3;
+      }
+      .download {
+        position: fixed;
+        top:60px;
+        right:0;
+        display: inline-block;
+        cursor: pointer;
+        z-index: 4;
+        transition: opacity 0.25s;
+      }
+      .format {
+        display: none;
+        right:0; /* left:-260px; */
+        position: absolute;
+        background-color: #f1f1f1;
+        width: 298px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 4;
+      }
+      .format a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        border-bottom: 2px inset rgba(141,144,242,0.3); /*rgba(134,121,121,0.3);*/ /* rgba(0,0,0,0.2); *//*  rgba(0,0,0,0.2);*/
+        display: block;
+      }
+      .format a:hover {
+        background-color: #ddd;
+        text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+      }
+      .download:hover .format {
+        display: block;
+      }
+/*      .download:hover .dropbtn {background-color: #3e8e41;}*/
+      .download:hover {
+        opacity:1;
+      }
+      .stickDwldMenu {
+        display:block;
+      }
+      .stickDwldBtn {
+        opacity:1;
+      }
+      .unStickDwldMenu {
+        display:none;
+      }
+      .unStickDwldBtn {
+        opacity:0.75;
+      }
+      .format-logos{
+        float:right;
+        position:relative;
+        top:-5px;
+      }
+      #exit-vAlign {
+        display:inline-block;
+        align:relative;
+      }
+      #onoff{
+        align:absolute; /* To keep for Vertical Align 1/4 + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        transform: translate(-0.5px,1.75px); /* To keep for Vertical Align 2/4  + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        transition: opacity 5s;
+      }
+      #onoff:hover{
+        opacity: 0.2;
+      }
+      #left-pane{
+        padding:8px 10px;
+        float:left;
+        z-index:0;
+        background-color:#aaa; /*#aaa;*/
+        position:absolute;
+        top:48px;/*-1540px;*/ /*48px;*/
+        width:280px; /*25%;*/
+        left:-280px;/*-25%;*/
+        height:500px;
+      }
+      #reduce-pane{
+        float:right;
+        /*position:static;*/
+        /*display:inline-block;*/
+        /*left:250px;*/
+        cursor: pointer;
+        /*text-shadow: 1px 1px 2px rgba(0,0,0,0.3);*/
+        border: 2px outset rgba(141,144,242,0.3); /*outset groove*/
+        /*box-shadow: 2px 2px 5px #000;*/ /*rgba(200,200,200,0.2);*/
+        border-radius: 8px;
+      }
+    .halfRotateLeft{
+      transform: rotate(180deg);
+      transition: transform 1s linear;
+    }
+    .halfRotateRight{
+      transform: rotate(0deg);
+      transition: transform 1s linear;
+    }
+    #arr1,#arr2 {
+      display:inline-block;
+      /*font-weight: bold;*/
+      font-stretch: condensed;
+      letter-spacing: 0px;
+      /*font-family: "Helvetica Narrow","Arial Narrow",Tahoma,Arial,Helvetica,sans-serif;*/
+    }
+    #dwld-img {
+      background-image: url('./logo/Download.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: 15px 15px 10px #888;
+      -moz-box-shadow: 15px 15px 10px #888;
+      -webkit-box-shadow: 15px 15px 10px #888;
+      -khtml-box-shadow: 15px 15px 10px #888;
+      -moz-border-radius:50%;
+      -webkit-border-radius:50%;
+      border-radius:50%;
+    }
+    .img-dspl {
+      height:50px;
+      /**************/
+      /* !! WARNING: The WIDTH has also to be modified in the JQUERY button MOUSELEAVE reset function !! Do a ctrl+f when you update the value. */
+      width:50px;
+      /* !! WARNING */
+      /**************/
+    }
+    .grid-pane {
+      display: inline-grid;
+      /*grid-gap: 10px;*/
+      grid-template-columns: 245px;
+      background-color: #2196F3;
+    }
+    .grid-elt {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+    /*  font-size: 30px;
+      text-align: center;*/
+    }
+    .grid-contact {
+      display: inline-grid;
+      grid-template-columns: 10px auto;
+    }
+    .grid-outils {
+      display: inline-grid;
+      grid-template-columns: auto;
+      grid-gap: 15px;
+    }
+    .skls-lvl-tot {
+      width:120px;
+      height:5px;
+      background-color: white;
+      border-radius: 50px;
+    }
+    .skls-lvl-hgh {
+      position:relative;
+      top:-5px;
+      width:90px;
+      height:5px;
+      background-color: #006;
+      border-radius: 50px;
+    }
+    .skls-lvl-med {
+      position:relative;
+      top:-5px;
+      width:60px;
+      height:5px;
+      background-color: #006;
+      border-radius: 50px;
+    }
+    .skls-lvl-low {
+      position:relative;
+      top:-5px;
+      width:30px;
+      height:5px;
+      background-color: #006;
+      border-radius: 50px;
+    }
+    .grid-lglvl {
+      display: inline-grid;
+      grid-template-columns: 7px 7px 7px 7px 7px;
+      grid-column-gap: 5px;
+      padding: 5px;
+    }
+    .lg1 {
+      width:7px;
+      height:7px;
+      top:-0.1em;
+      position:relative;
+      background-color: #006;
+      border-radius: 5px;
+/*      display: inline-block;*/
+    }
+    .lg0 {
+      width:7px;
+      height:7px;
+      top:-0.1em;
+      position:relative;
+      background-color: #ccc;
+      border-radius: 5px;
+      /*      display: inline-block;*/
+    }
+    .flex-lgnmlvl {
+      display: flex;
+      background-color: DodgerBlue;
+    }
+    .lgnm {
+      background-color: #f1f1f1;
+      /*width: 50px;*/
+      margin: 1px;
+      padding: 5px;
+    }
+    .lglvl {
+      background-color: #f1f1f1;
+      /*width: 70px;*/
+      margin: 1px;
+      padding: 5px;
+    }
+    .flex-lgnmlvl-list {
+      display: column;
+      flex-direction: column;
+      flex-wrap: wrap;
+      background-color: DodgerBlue;
+    }
+    .lgnmlvl-list {
+      background-color: #f1f1f1;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: 300px auto 53px;
+      grid-template-rows: 48px auto 40px;
+      grid-gap: 0px;
+      padding: 0px;
+/*      background-color: #0a1dff;*/
+    }
+    .grid-container > div {
+/*      background-color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      padding: 10px 0;
+      font-size: 30px;
+*/    }
+    .page-bottom {
+      overflow: hidden;
+      background-color: purple;
+      position: static;
+      bottom: 0;
+      width: 100%;
+      height:38px;
+      z-index:1;
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  </style>
+</head>
+<body>
+  <div class="menubar-shift"></div>
+    <div class="menubar">
+    <a href="#home">CV</a>
+    <a href="#news">Projets</a>
+    <a href="#contact">Stats</a>
+  </div>
+  <div class="left-pane-shift" style="position:static;float:left;width:299px;height:1500px;border: 1px solid;"></div>
+  <div id="margin1" style="float:left;width:5px;height:1500px;border: 1px solid;"></div>
+  <div class="dwnl-btn-shift" style="position:static;float:right;width:50px;height:1500px;border: 1px solid;"></div>
+  <div id="margin2" style="float:right;width:3px;height:1500px;border: 1px solid;"></div>
+  <div id="page-content" class="clearfix" style="padding:0px 8px 0px 5px;height:1500px;border: 0px solid;"> <!-- OTHER CLEARFIX METHOD: overflow:auto; --> <!-- display:grid;grid-template-columns:auto; -->
+    <div class="flex-lgnmlvl-list">
+      <div class="lgnmlvl-list">
+        <div class="flex-lgnmlvl">
+          <div class="lgnm">Français</div>
+          <div class="lglvl">
+            <div class="grid-lglvl">
+              <div class="lg1"></div>
+              <div class="lg1"></div>
+              <div class="lg1"></div>
+              <div class="lg1"></div>
+              <div class="lg0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lgnmlvl-list">
+        <div class="flex-lgnmlvl">
+          <div class="lgnm">Français</div>
+          <div class="lglvl">
+            <div class="grid-lglvl">
+              <div class="lg1"></div>
+              <div class="lg1"></div>
+              <div class="lg1"></div>
+              <div class="lg1"></div>
+              <div class="lg0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="slide-left1" class="box-section" style=""> <!-- style="top:48px;" -->
+      <div id="exp-ttl" class="section-title">EXPERIENCE PROFESSIONNELLE</div>
+      <div id="exp-udl"></div>
+      <div id="exp-dtl" class="section-content">ADP<br/>CA<br/>IBM<br/></div>
+    </div><br>
+    <div id="slide-left2" class="box-section" style="">
+      <div id="frm-ttl" class="section-title">FORMATION</div>
+      <div id="frm-udl"></div>
+      <div id="frm-dtl" class="section-content">UNI<br/>IUT<br/></div>
+    </div><br>
+    <div id="slide-left3" class="box-section">
+      <div id="lng-ttl" class="section-title">LANGUES</div>
+      <div id="lng-udl"></div>
+      <div id="lng-dtl" class="section-content" style="text-align:left;">
+        Français <div class="lg1"></div>
+      </div>
+    </div><br>
+    <div id="slide-left4" class="box-section">
+      <div id="dvs-ttl" class="section-title">DIVERS</div>
+      <div id="dvs-udl"></div>
+      <div id="dvs-dtl" class="section-content">Loisirs<br/>Permis<br/></div>
+    </div><br>
+  </div>
+
+  <div class="page-bottom"></div>
+  <div id="left-pane">
+    <div id="reduce-pane"><div id="arr1"><</div><div id="arr2"><</div></div>
+    <div class="grid-pane">
+      <div class="grid-elt">PHOTO</div>
+      <div class="grid-elt">
+        <div id="pfl-ttl" class="section-title-left">PROFIL</div>
+        <div id="pfl-udl"></div>
+        <div id="pfl-dtl">blabla</div>
+      </div>
+      <div class="grid-elt">
+        <div id="ctc-ttl" class="section-title-left">CONTACT</div>
+        <div id="ctc-udl"></div>
+        <div id="ctc-dtl" class="grid-contact">
+          <div>a</div>
+          <div>b</div>
+          <div>c</div>
+          <div>d</div>
+          <div>e</div>
+          <div>f</div>
+          <div>g</div>
+          <div>h</div>
+        </div>
+      </div>
+      <div class="grid-elt">
+        <span id="out-ttl" class="section-title-left">OUTILS ET LOGICIELS</span>
+        <div id="out-udl"></div>
+        <div id="out-dtl" class="grid-outils">
+          <div>
+            <div style="position:relative;top:+10px;left:-10px;">Niveau de maîtrise :</div>
+          </div>
+          <div>
+            <div>Bon :</div>
+            <div class="skls-lvl-tot"></div>
+            <div class="skls-lvl-hgh"></div>
+            <div style="position:relative">kjhkhkkk</div>
+          </div>
+          <div>
+            <div>Intermédiaire :</div>
+            <div class="skls-lvl-tot"></div>
+            <div class="skls-lvl-med"></div>
+            <div>kjhkhkkk</div>
+          </div>
+          <div>
+            <div>Débutant :</div>
+            <div class="skls-lvl-tot"></div>
+            <div class="skls-lvl-low"></div>
+            <div>kjhkhkkk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings box-settings">
+    <span id="lightMinus" class="button"><span class="rotateLeft">☼</span></span><span id="lightPlus" class="button"><span class="rotateRight">☀</span></span>
+    <span id="fontMinus" class="button">A<div class="bounceMinus"><sup>-</sup></div></span><span id="fontPlus" class="button">A<div class="bouncePlus"><sup>+</sup></div></span>
+    <span id="lgFR" class="button"><div class="lg-vAlign"><img id="lg" src="Flag_FR.gif" alt="FR"></div></span><span
+          id="lgEN" class="button"><div class="lg-vAlign"><img id="lg" src="Flag_EN.gif" alt="EN"></div></span>
+    <span id="exit" class="button"><div id="exit-vAlign"><img id="onoff" src="./logo/OnOff.png" alt="Exit" width="15" height="15"></div></span>
+  </div>
+
+  <div id="dwld-btn" class="download button unStickDwldBtn">
+    <div id="dwld-img" class="img-dspl"></div>  <!-- IF DON'T WANT TO USE SHADOW ON CIRCLE IMAGE, THEN COULD USE: <img id="dwld" src="./logo/Download.png" alt="Download">-->
+    <div id="dwld-fmt" class="format">
+      <a href="#">PDF (.pdf) <img class="format-logos" src="./logo/PDF.png" alt="PDF" width="30" height="30"></a>
+      <a href="#">MS Word XML 2k7 (.docx) <img class="format-logos" src="./logo/MSWord2007.png" alt="Word 2007" width="30" height="30"></a>
+      <a href="#">MS Word 2k3 (.doc) <img class="format-logos" src="./logo/MSWord2003.png" alt="Word 2003" width="30" height="30"></a>
+      <a href="#">Open Office Writer (.odt)  <img class="format-logos" src="./logo/OOWriter.png" alt="Writer (Open Office)" width="30" height="30"></a>
+      <a href="#">Libre Office Writer (.odf) <img class="format-logos" src="./logo/LOWriter.png" alt="Writer (Libre Office)" width="30" height="30"></a>
+      <a href="#">Powerpoint (.ppt) <img class="format-logos" src="./logo/MSPowerPoint.png" alt="PowerPoint" width="30" height="30"></a>
+      <a href="#">Open Office Impress (.odt) <img class="format-logos" src="./logo/OOImpress.png" alt="Impress (Open Office)" width="30" height="30"></a>
+      <a href="#">Libre Office Impress (.odf) <img class="format-logos" src="./logo/LOImpress.png" alt="Impress (Libre Office)" width="30" height="30"></a>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      //No Title underlined yet
+      var pflUndlnd = false;
+      var ctcUndlnd = false;
+      var outUndlnd = false;
+      var expUndlnd = false;
+      var frmUndlnd = false;
+      var lgUndlnd = false;
+      var dvUndlnd = false;
+      var darkModeLevel = 0; //From 0 (None: Light) to 3 (Activated: Dark)
+      var fontSizeLevel = 5; //From 0 (Smallest) to 10 (Largest)
+      var leftPaneState = 1; //1: Shown ; 0: Moving ; -1: Hidden
+      var dwldMenuStuck = 0; // Has the main download button been clicked to make the sub-menu persistent
+
+      // Underline section titles when sliding down (or undo when sliding up)
+      function underlineTitle(isDone, tagName, speed, side, next=null) {
+        var wdtUdl = '';
+        var anim = '';
+        if(side == 'R') {
+          wdtUdl = '50vw';//'380px';
+          anim = 'swing';
+        } else if (side == 'L') {
+          wdtUdl = '200px';
+          anim = 'linear';
+        }  else {
+          return isDone; // No change of the variable boolean value
+        }
+        if(!isDone){
+          $(tagName).animate({width: wdtUdl}, speed, anim, next);
+          return !isDone;
+        }else{
+          $(tagName).animate({width: '0px'}, speed, anim, next);
+          return !isDone;
+        }
+      }
+
+      /* ON-CLICK EVENTS */
+
+      // Sliding sections
+      $('#pfl-ttl').click(function() {
+        $('#pfl-dtl').slideToggle('slow');
+        pflUndlnd = underlineTitle(pflUndlnd, '#pfl-udl', 200, 'L');
+      })
+      $('#ctc-ttl').click(function() {
+        $('#ctc-dtl').slideToggle('slow');
+        ctcUndlnd = underlineTitle(ctcUndlnd, '#ctc-udl', 200, 'L');
+      })
+      $('#out-ttl').click(function() {
+        $('#out-dtl').slideToggle('slow');
+        outUndlnd = underlineTitle(outUndlnd, '#out-udl', 200, 'L');
+      })
+      $('#exp-ttl').click(function() {
+        $('#exp-dtl').slideToggle('slow');
+        expUndlnd = underlineTitle(expUndlnd, '#exp-udl', 250, 'R');
+      })
+      $('#frm-ttl').click(function() {
+        $('#frm-dtl').slideToggle('slow');
+        frmUndlnd = underlineTitle(frmUndlnd, '#frm-udl', 250, 'R');
+      })
+      $('#lng-ttl').click(function() {
+        $('#lng-dtl').slideToggle('slow');
+        lgUndlnd = underlineTitle(lgUndlnd, '#lng-udl', 250, 'R');
+      })
+      $('#dvs-ttl').click(function() {
+        $('#dvs-dtl').slideToggle('slow');
+        dvUndlnd = underlineTitle(dvUndlnd, '#dvs-udl', 250, 'R');
+      })
+
+      $('#lightMinus').click(function() {
+          if (darkModeLevel != 3) {
+            document.body.classList.remove("dark-mode-lv"+darkModeLevel);
+            darkModeLevel++;
+            document.body.classList.add("dark-mode-lv"+darkModeLevel);
+          }
+        }
+      )
+
+      $('#lightPlus').click(function() {
+          if (darkModeLevel != 0) {
+            document.body.classList.remove("dark-mode-lv"+darkModeLevel);
+            darkModeLevel--;
+            document.body.classList.add("dark-mode-lv"+darkModeLevel);
+          }
+
+          /* document.getElementById("lightPlus").classList.remove("button");
+          document.getElementById("lightPlus").classList.add("button-disabled");*/
+        }
+      )
+
+      $('#fontMinus').click(function() {
+        if (fontSizeLevel != 0) {
+          chgFontSizeOfElt(".section-title", -1);
+          //chgFontSizeOfElt("body", -2);
+          chgFontSizeOfElt(".section-content", -2);
+          fontSizeLevel--;
+        }
+      })
+
+      $('#fontPlus').click(function() {
+        if (fontSizeLevel != 10) {
+          chgFontSizeOfElt(".section-title", 1);
+          //chgFontSizeOfElt("body", 2);
+          chgFontSizeOfElt(".section-content", 2);
+          fontSizeLevel++;
+        }
+      })
+
+      function chgFontSizeOfElt(elt, size){
+        var fontSize = parseInt($(elt).css("font-size"));
+        fontSize = fontSize + size + "px";
+        $(elt).css({'font-size':fontSize});
+      }
+
+      $('#fontMinus').mouseenter(function() {$('.bounceMinus').animate({top:'+=0.4em'}, 350, 'swing').animate({top:'-=0.4em'}, 350, 'swing');})
+      $('#fontPlus').mouseenter(function() {$('.bouncePlus').animate({top:'+=0.4em'}, 350, 'swing').animate({top:'-=0.4em'}, 350, 'swing');})
+
+      $('#reduce-pane').click(function(){
+        if(leftPaneState != 0) { // If moving, we ignore any clicking
+          if(leftPaneState == 1) { // If Pane is shown, we'll hide it
+            leftPaneState = 0; //Status: Moving
+            $('.left-pane-shift').animate({width:'41px'},1500,"linear");
+            $('#left-pane').animate({left:'-258px'},1500,"linear",function(){
+              leftPaneState = -1; //Final status: Hidden
+            });
+            document.getElementById("reduce-pane").classList.remove("halfRotateRight");
+            document.getElementById("reduce-pane").classList.add("halfRotateLeft");
+          } else { // If Pane is hidden, we'll show it
+            leftPaneState = 0; //Status: Moving
+            $('.left-pane-shift').animate({width:'299px'},1500,"linear");
+            $('#left-pane').animate({left:'0px'},1500,"linear",function(){
+              leftPaneState = 1; //Final status: Displayed
+            });
+            document.getElementById("reduce-pane").classList.remove("halfRotateLeft");
+            document.getElementById("reduce-pane").classList.add("halfRotateRight");
+          }
+        }
+      })
+
+      $('#dwld-img').click(function(){
+        if(!dwldMenuStuck) { // If sub-menu not persistent yet
+          document.getElementById("dwld-btn").classList.remove("unStickDwldBtn");
+          document.getElementById("dwld-fmt").classList.remove("unStickDwldMenu");
+          document.getElementById("dwld-btn").classList.add("stickDwldBtn");
+          document.getElementById("dwld-fmt").classList.add("stickDwldMenu");
+        } else {
+          document.getElementById("dwld-btn").classList.remove("stickDwldBtn");
+          document.getElementById("dwld-fmt").classList.remove("stickDwldMenu");
+          document.getElementById("dwld-btn").classList.add("unStickDwldBtn");
+          document.getElementById("dwld-fmt").classList.add("unStickDwldMenu");
+        }
+        dwldMenuStuck = !dwldMenuStuck;
+      })
+
+      function animDwldBtn() {
+        $('.img-dspl').animate({width:'+=2px'}, 1000, 'linear')
+                      .animate({width:'-=2px'}, 1000, 'linear')
+                      .animate({width:'-=2px'}, 1000, 'linear')
+                      .animate({width:'+=2px'}, 1000, 'linear', animDwldBtn);
+      }
+
+      $('#dwld-img').mouseenter(function() {
+        if(!dwldMenuStuck){ // If we clicked (persistent menu), we don't want anymore to have the animated button
+          animDwldBtn();
+        }
+      })
+
+      $('#dwld-img').mouseleave(function() {
+        $('#dwld-img').stop(true,true);
+        $('.img-dspl').css('width','50px');
+      })
+
+      /* LAUNCH SCREEN ANIMATIONS */
+      var seq = $({});
+      seq.queue("q1", function(next){$('#left-pane').animate({left:'0px'},1500,"linear",next);});
+      seq.queue("q1", function(next){
+        pflUndlnd = underlineTitle(pflUndlnd, '#pfl-udl', 1, 'L', next);
+        ctcUndlnd = underlineTitle(ctcUndlnd, '#ctc-udl', 1, 'L', next);
+        outUndlnd = underlineTitle(outUndlnd, '#out-udl', 1, 'L', next);
+      });
+      seq.queue("q2", function(next){$('#slide-left1').animate({left:'0px'},250,next);}); //300px
+      seq.queue("q3", function(next){$('#slide-left2').animate({left:'0px'},500,next);});
+      seq.queue("q4", function(next){$('#slide-left3').animate({left:'0px'},750,next);});
+      seq.queue("q5", function(next){$('#slide-left4').animate({left:'0px'},1000,next);});
+      seq.queue("q5", function(next){expUndlnd = underlineTitle(expUndlnd, '#exp-udl', 1, 'R', next);});
+      seq.queue("q5", function(next){$('#exp-dtl').slideDown(300,next);});
+      seq.queue("q5", function(next){frmUndlnd = underlineTitle(frmUndlnd, '#frm-udl', 1, 'R', next);});
+      seq.queue("q5", function(next){$('#frm-dtl').slideDown(300,next);});
+      seq.queue("q5", function(next){lgUndlnd = underlineTitle(lgUndlnd, '#lng-udl', 1, 'R', next);});
+      seq.queue("q5", function(next){$('#lng-dtl').slideDown(300,next);});
+      seq.queue("q5", function(next){dvUndlnd = underlineTitle(dvUndlnd, '#dvs-udl', 1, 'R', next);});
+      seq.queue("q5", function(next){$('#dvs-dtl').slideDown(300,next);});
+      seq.dequeue("q1");
+      seq.dequeue("q2");
+      seq.dequeue("q3");
+      seq.dequeue("q4");
+      seq.dequeue("q5");
+    });
+
+  </script>
+
+</body>
+</html>
+https://www.freecodecamp.org/news/how-to-create-a-fully-responsive-navbar-with-flexbox-a4435d175dd3/
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Typical_Use_Cases_of_Flexbox
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Relationship_of_Flexbox_to_Other_Layout_Methods
+https://www.webdesignerdepot.com/2018/09/grid-vs-flexbox-which-should-you-choose/

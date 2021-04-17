@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CV</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      @keyframes slide-from-left {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left;
+        animation-duration: 1s;
+      }
+
+      @keyframes slide-from-left2 {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left2 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left2;
+        animation-duration: 1.5s;
+      }
+
+      @keyframes slide-from-left3 {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left3 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left3;
+        animation-duration: 2s;
+      }
+
+      @keyframes slide-from-left4 {
+        from {
+          left: 0%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .slide-left4 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: slide-from-left4;
+        animation-duration: 2.5s;
+      }
+
+      .section-title {
+        font-family: 'Arial', monospace;
+        font-size: 12pt;
+      }
+
+      .box {
+
+        border: 10px solid #006;
+        -moz-border-radius: 40px;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        box-shadow: 15px 15px 10px #888;
+      }
+  </style>
+</head>
+<body>
+    <button id='A'>TEST</button>
+    <div id='B'>
+      ADP<br/>CA<br/>IBM<br/>
+    </div>
+  <script>
+    $('#A').click(function() {$('#B').slideToggle('slow') })
+  </script>
+</body>
+</html>

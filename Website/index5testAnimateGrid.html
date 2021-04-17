@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CV</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    body {
+      margin: 0px;
+      width: 100%;
+      overflow-x: hidden; /* Because the 'padding' value causes the 'width:100%' to exceed the screen */
+/*      font-size: 5px;
+        style="background-color: black;
+              color: black;
+      background-color: black;*/
+    }
+    .dark-mode-lv0 {
+      background-color: white;
+      color: black;
+    }
+    .dark-mode-lv1 {
+      background-color: LightGray;
+      color: black;
+    }
+    .dark-mode-lv2 {
+      background-color: DarkGray;
+      color: black;
+    }
+    .dark-mode-lv3 {
+      background-color: DarkBlue;
+      color: Lavender; /*Ivory;SeaShell;*/
+      /* font: bolder */
+    }
+    .button {
+      opacity: 1;
+      cursor: pointer;
+    }
+    .button-disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .menubar {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    #page-content {
+      /*  overflow: auto;*/
+  /*    padding: 16px;
+      margin-top: 30px;
+      height: 1500px;*/ /* Used in this example to enable scrolling */
+    }
+      #slide-left, #slide-left2, #slide-left3, #slide-left4 {
+        left: -50%;
+        /*width: 100%;*/
+        max-width: 100%;
+        position: relative;
+        display: block;
+      }
+      .box-section {
+        margin: auto;
+        text-align: center;
+        border: 10px solid #006;
+        -moz-border-radius: 40px;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        box-shadow: 15px 15px 10px #888;
+      }
+      #exp-udl,#frm-udl,#dvs-udl,#lng-udl {
+        width: 0px;
+        height: 5px;
+        background: black;
+        transition: width 1s;
+      }
+      #pfl-udl,#ctc-udl,#out-udl {
+        width: 0px;
+        height: 5px;
+        background: black;
+        transition: width 1s;
+      }
+      #lightMinus,#lightPlus,#fontMinus,#fontPlus,#lgFR,#lgEN,#exit {
+        border: 1px solid;
+      }
+      #fontMinus,#fontPlus {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+      }
+      .lg-vAlign { /* MUST be kept as a DIV ; this Vertical Align doesn't perform on a Span (so simulating the Span with 'inline-block') */
+        display:inline-block;
+        position:relative;
+        transition: transform 0.5s ease;
+
+        /*-moz-transition: transform 500ms ease 0s;
+        -o-transition: transform  500ms ease 0s;
+        -webkit-transition: transform 500ms ease 0s;*/
+      }
+      .lg-vAlign:hover {
+        /*-moz-transform: rotateY(5deg);
+        -o-transform: rotateY(35deg);
+        -webkit-transform: rotateY(35deg);*/
+        transform: rotateX(13deg) rotateY(25deg) rotateZ(9deg);
+      }
+      #lg{
+        align:absolute; /* To keep for Vertical Align 1/4 + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        transform: translate(0px,1.5px); /* To keep for Vertical Align 2/4  + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        width:24px;
+        height:15px;
+        border-radius: 8px; /* ou: 50% */
+        transition: box-shadow .5s, opacity .5s;
+      }
+      #lg:hover{
+        box-shadow: 2px 1px 2px 0.5px #aaa; /* 0 0 11px rgba(33,33,33,.2);*/
+        opacity: 1 /*0.75*/;
+      }
+      .rotateLeft,.rotateRight{
+          display:inline-block;
+          /* transition: transform 1s ease-in-out; IF WANT TO KEEP NOT COMING BACK OF THE WHEEL, THEN THIS LINE NOT NECESSARY */
+      }
+      .rotateLeft:hover {
+          animation: rotateLeft 0.8s ease-in-out;
+      }
+      .rotateRight:hover {
+          animation: rotateRight 0.8s ease-in-out;
+      }
+      @keyframes rotateLeft {
+          from {transform: rotate(0deg);}
+          to {transform: rotate(-360deg);}
+      }
+      @keyframes rotateRight {
+          from {transform: rotate(0deg);}
+          to {transform: rotate(360deg);}
+      }
+      .bounceMinus,.bouncePlus {
+          position: relative;
+          display:inline-block;
+          /*transition:all 1s ease-in-out;*/
+      }/*
+      .bounce:hover {
+        animation: bounce 1s ease-in-out;
+        animation-iteration-count: 1;
+      }
+      @keyframes bounce {
+        0% {
+            transform: translateY(0px);
+        }
+        15% {
+            transform: translateY(-15px);
+        }
+        50% {
+            transform: translateY(15px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+      }*/
+      .section-title {
+        cursor: pointer;
+        font-family: 'Arial', monospace;
+        font-size: 12pt;
+      }
+      .section-title-left {
+        cursor: pointer;
+      }
+      .section-content {
+        display:none;
+      }
+      .box-settings {
+        /*max-width: 250px;*/
+        margin: auto;
+        text-align: center;
+        border: 10px solid #006;
+        -moz-border-radius: 40px;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        box-shadow: 15px 15px 10px #888;
+        display: inline-block;
+      }
+      .settings {
+        position:fixed;
+        right:0;
+        top:5px;
+        /* To center to the middle of the screen:
+        top:10%;
+        left:50%;
+        transform: translate(-50%, -50%); */
+        z-index: 3;
+      }
+      .download {
+        position: fixed;
+        top:60px;
+        right:0;
+        display: inline-block;
+        cursor: pointer;
+        z-index: 4;
+        transition: opacity 0.25s;
+      }
+      .format {
+        display: none;
+        right:0; /* left:-260px; */
+        position: absolute;
+        background-color: #f1f1f1;
+        width: 298px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 4;
+      }
+      .format a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        border-bottom: 2px inset rgba(141,144,242,0.3); /*rgba(134,121,121,0.3);*/ /* rgba(0,0,0,0.2); *//*  rgba(0,0,0,0.2);*/
+        display: block;
+      }
+      .format a:hover {
+        background-color: #ddd;
+        text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+      }
+      .download:hover .format {
+        display: block;
+      }
+/*      .download:hover .dropbtn {background-color: #3e8e41;}*/
+      .download:hover {
+        opacity:1;
+      }
+      .stickDwldMenu {
+        display:block;
+      }
+      .stickDwldBtn {
+        opacity:1;
+      }
+      .unStickDwldMenu {
+        display:none;
+      }
+      .unStickDwldBtn {
+        opacity:0.75;
+      }
+      .format-logos{
+        float:right;
+        position:relative;
+        top:-5px;
+      }
+      #exit-vAlign {
+        display:inline-block;
+        align:relative;
+      }
+      #onoff{
+        align:absolute; /* To keep for Vertical Align 1/4 + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        transform: translate(-0.5px,1.75px); /* To keep for Vertical Align 2/4  + PARENT MUST BE: "display:inline-block;align:relative" (3/4 & 4/4) */
+        transition: opacity 5s;
+      }
+      #onoff:hover{
+        opacity: 0.2;
+      }
+      #left-pane{
+        padding:8px 10px;
+        float:left;
+        z-index:0;
+        background-color:#aaa; /*#aaa;*/
+        position:relative;
+        top:0; /*48px;*/
+        width:280px;
+        left:-280px;
+        height:500px;
+      }
+      #reduce-pane{
+        float:right;
+        /*position:static;*/
+        /*display:inline-block;*/
+        /*left:250px;*/
+        cursor: pointer;
+        /*text-shadow: 1px 1px 2px rgba(0,0,0,0.3);*/
+        border: 2px outset rgba(141,144,242,0.3); /*outset groove*/
+        /*box-shadow: 2px 2px 5px #000;*/ /*rgba(200,200,200,0.2);*/
+        border-radius: 8px;
+      }
+    .halfRotateLeft{
+      transform: rotate(180deg);
+      transition: transform 1s linear;
+    }
+    .halfRotateRight{
+      transform: rotate(0deg);
+      transition: transform 1s linear;
+    }
+    #arr1,#arr2 {
+      display:inline-block;
+      /*font-weight: bold;*/
+      font-stretch: condensed;
+      letter-spacing: 0px;
+      /*font-family: "Helvetica Narrow","Arial Narrow",Tahoma,Arial,Helvetica,sans-serif;*/
+    }
+    #dwld-img {
+      background-image: url('./logo/Download.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: 15px 15px 10px #888;
+      -moz-box-shadow: 15px 15px 10px #888;
+      -webkit-box-shadow: 15px 15px 10px #888;
+      -khtml-box-shadow: 15px 15px 10px #888;
+      -moz-border-radius:50%;
+      -webkit-border-radius:50%;
+      border-radius:50%;
+    }
+    .img-dspl {
+      height:50px;
+      /**************/
+      /* !! WARNING: The WIDTH has also to be modified in the JQUERY button MOUSELEAVE reset function !! Do a ctrl+f when you update the value. */
+      width:50px;
+      /* !! WARNING */
+      /**************/
+    }
+    .grid-pane {
+      display: inline-grid;
+      /*grid-gap: 10px;*/
+      grid-template-columns: 245px;
+      background-color: #2196F3;
+    }
+    .grid-elt {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+    /*  font-size: 30px;
+      text-align: center;*/
+    }
+    .grid-contact {
+      display: inline-grid;
+      grid-template-columns: 10px auto;
+    }
+    .grid-outils {
+      display: inline-grid;
+      grid-template-columns: auto;
+      grid-gap: 15px;
+    }
+    .skls-lvl-tot {
+      width:120px;
+      height:5px;
+      background-color: white;
+      border-radius: 50px;
+    }
+    .skls-lvl-hgh {
+      position:relative;
+      top:-5px;
+      width:90px;
+      height:5px;
+      background-color: #006;
+      border-radius: 50px;
+    }
+    .skls-lvl-med {
+      position:relative;
+      top:-5px;
+      width:60px;
+      height:5px;
+      background-color: #006;
+      border-radius: 50px;
+    }
+    .skls-lvl-low {
+      position:relative;
+      top:-5px;
+      width:30px;
+      height:5px;
+      background-color: #006;
+      border-radius: 50px;
+    }
+    #grid-container {
+      display: grid;
+      grid-template-columns: 300px auto 53px;
+      grid-template-rows: 48px auto 40px;
+      grid-gap: 1px;
+      padding: 1px;
+      background-color: #0a1dff;
+    }
+    #grid-container > div {
+      background-color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      padding: 10px 0;
+      font-size: 30px;
+    }
+    #page-bottom {
+      grid-column-start: 1;
+      grid-column-end: 4;
+      overflow: hidden;
+      background-color: purple;
+      position: static;
+      bottom: 0;
+      width: 100%;
+      z-index:2;
+    }
+  </style>
+</head>
+<body>
+  <div id="grid-container">
+    <div id="itm1" class="menubar">1
+    </div>
+    <div  id="itm2" class="grid-elt-behnd-left-pane">22<br>22<br>22<br>22<br>22</div>
+    <div id="page-content">33<br>33<br>33<br>33<br>333
+    </div>
+    <div id="grid-elt-behnd-dwnl-btn">44<br>44<br>44<br>44<br>44<br>444</div>
+    <div id="page-bottom">5555</div>
+  </div>
+
+
+  <script>
+    $(document).ready(function(){
+
+      $('#itm1').click(function(){
+        $('#itm2').slideToggle('slow');
+      })
+
+    });
+  </script>
+
+</body>
+</html>
